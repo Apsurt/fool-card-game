@@ -167,19 +167,37 @@ class Game:
         return draw_from_attack
 
     def run(self) -> None:
-        pass
+        """
+        Main game loop.
+        """
+        for i in range(self.player_count):
+            self.player_fill(i)
+            self.get_player(i).print_hand()
+        running = True
+        while running:
+            player = self.current_player
+            drawn = []
+            if self.attack_pile.cards_left:
+                seq = player.get_defending_sequence(self.attack_pile._cards)
+                drawn = self.defend(seq)
+                player.hand.add_many(drawn)
+            self.player_fill(self.current_player_idx)
+            if len(drawn) == 0:
+                seq = player.get_attacking_sequence()
+                self.attack(seq)
+            self.player_fill(self.current_player_idx)
+            self.advance_current_player()
+
+            #placeholder break
+            if self.current_player_idx == 0:
+                running = False
+
+        for i in range(self.player_count):
+            self.get_player(i).print_hand()
 
 if __name__ == "__main__":
     game = Game()
     print(repr(game.trump))
     game.add_player("1")
     game.add_player("2")
-    for i in range(5):
-        for pidx in range(game.player_count):
-            game.player_draw(pidx)
-    game.get_player(0).print_hand()
-    game.get_player(1).print_hand()
-    game.attack(game.current_player.hand._cards[0:3])
-    game.current_player_idx += 1
-    #game.defend(game.current_player.hand._cards[0:1])
-    print(game.defend([None, None, None]))
+    game.run()
