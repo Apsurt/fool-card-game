@@ -98,6 +98,17 @@ class Game:
                 return player
         return None
 
+    def advance_current_player(self) -> int:
+        """
+        Advances current_player_idx to next player.
+
+        :return: Next current_player_idx
+        :rtype: int
+        """
+        self.current_player_idx += 1
+        self.current_player_idx %= self.player_count
+        return self.current_player_idx
+
     def player_draw(self, player_idx: int) -> StandardCard:
         """
         Draws card from deck and add it to specified players hand.
@@ -142,6 +153,9 @@ class Game:
                     raise InvalidMove("Defending card weaker or wrong suit.")
         self.attack_pile.clear()
         return draw_from_attack
+
+    def run(self) -> None:
+        pass
 
 if __name__ == "__main__":
     game = Game()
