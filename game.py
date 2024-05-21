@@ -44,14 +44,16 @@ class Game:
         self.players = []
         self.current_player_idx = 0
 
-    def add_player(self, name: str) -> None:
+    def add_player(self, name: str, player_class: type[Player] = Player) -> None:
         """
         Adds player to list of players.
 
         :param name: Name of the player to add
         :type name: str
+        :param player_class: constructor of a class that inherits from Player, defaults to Player
+        :type player_class: type[Player], optional
         """
-        self.players.append(Player(name))
+        self.players.append(player_class(name))
 
     @property
     def player_count(self) -> int:
