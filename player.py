@@ -10,6 +10,10 @@ class Player:
     def draw(self, card: pyCardDeck.CardType) -> None:
         self.hand.add_single(card)
 
+    @property
+    def cards_left(self) -> int:
+        return self.hand.cards_left
+
     def print_hand(self) -> None:
         print(self.hand._cards)
 
