@@ -176,6 +176,9 @@ class Game:
         running = True
         while running:
             player = self.current_player
+            if player.cards_left == 0:
+                self.advance_current_player()
+                continue
             drawn = []
             if self.attack_pile.cards_left:
                 seq = player.get_defending_sequence(self.attack_pile._cards)
@@ -195,7 +198,11 @@ class Game:
             self.advance_current_player()
 
             #placeholder break
-            if self.current_player_idx == 0:
+            non_zero_count = 0
+            for player in self.players:
+                if player.cards_left != 0:
+                    non_zero_count += 1
+            if non_zero_count == 1:
                 running = False
 
         for i in range(self.player_count):
