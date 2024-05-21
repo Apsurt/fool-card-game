@@ -181,11 +181,17 @@ class Game:
                 seq = player.get_defending_sequence(self.attack_pile._cards)
                 drawn = self.defend(seq)
                 player.hand.add_many(drawn)
-            self.player_fill(self.current_player_idx)
+            try:
+                self.player_fill(self.current_player_idx)
+            except pyCardDeck.OutOfCards:
+                pass
             if len(drawn) == 0:
                 seq = player.get_attacking_sequence()
                 self.attack(seq)
-            self.player_fill(self.current_player_idx)
+            try:
+                self.player_fill(self.current_player_idx)
+            except pyCardDeck.OutOfCards:
+                pass
             self.advance_current_player()
 
             #placeholder break
