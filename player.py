@@ -3,7 +3,6 @@ Module for storing player information in Player class.
 """
 
 from typing import List
-import itertools
 import pyCardDeck
 from pyCardDeck import CardType
 
