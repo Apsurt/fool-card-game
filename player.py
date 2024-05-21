@@ -1,5 +1,10 @@
-import pyCardDeck
+"""
+Module for storing player information in Player class.
+"""
+
 from typing import List
+import itertools
+import pyCardDeck
 from pyCardDeck import CardType
 
 class Player:
@@ -18,7 +23,9 @@ class Player:
         print(self.hand._cards)
 
     def get_attacking_sequence(self) -> List[CardType]:
-        pass
+        #placeholder
+        return [self.hand.draw()]
 
-    def get_defending_sequence(self) -> List[CardType]:
-        pass
+    def get_defending_sequence(self, attacking_sequence: List[CardType]) -> List[CardType]:
+        #placeholder
+        return [None]*len(attacking_sequence)
