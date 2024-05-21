@@ -122,6 +122,18 @@ class Game:
         self.players[player_idx].draw(drawn_card)
         return drawn_card
 
+    def player_fill(self, player_idx: int, limit: int = 5) -> None:
+        """
+        Fills player hand till cretain limit
+
+        :param player_idx: Drawing player index
+        :type player_idx: int
+        :param limit: fill hand till this number, defaults to 5
+        :type limit: int, optional
+        """
+        while self.get_player(player_idx).cards_left < limit:
+            self.player_draw(player_idx)
+
     def attack(self, sequence: List[CardType]) -> None:
         print(sequence)
         if self.attack_pile.cards_left:
