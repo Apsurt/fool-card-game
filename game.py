@@ -157,7 +157,7 @@ class Game:
                 "Number of cards in sequence has to be equal to number of cards on attack pile.")
         draw_from_attack = []
         for idx, card in enumerate(sequence):
-            attack_card = self.attack_pile._cards[idx]
+            attack_card = list(iter(self.attack_pile))[idx]
             if not card:
                 draw_from_attack.append(attack_card)
             else:
@@ -183,7 +183,7 @@ class Game:
                 continue
             drawn = []
             if self.attack_pile.cards_left:
-                seq = player.get_defending_sequence(self.attack_pile._cards)
+                seq = player.get_defending_sequence(list(iter(self.attack_pile)))
                 drawn = self.defend(seq)
                 player.hand.add_many(drawn)
             try:

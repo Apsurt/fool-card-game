@@ -22,7 +22,7 @@ class Player:
         return self.hand.cards_left
 
     def print_hand(self) -> None:
-        print(self.hand._cards)
+        print(self.get_cards())
 
     def get_attacking_sequence(self) -> List[CardType]:
         #placeholder
