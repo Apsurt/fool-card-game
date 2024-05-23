@@ -11,6 +11,9 @@ class Player:
         self.name = name
         self.hand = pyCardDeck.Deck([], False, f"Hand of {self.name}")
 
+    def get_cards(self):
+        return list(iter(self.hand))
+
     def draw(self, card: pyCardDeck.CardType) -> None:
         self.hand.add_single(card)
 
