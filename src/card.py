@@ -3,7 +3,7 @@ Module containing card class
 """
 
 from pyCardDeck import BaseCard
-from dictionaries import suits, short_to_value, suit_to_value
+from .dictionaries import suits, short_to_value, suit_to_value
 
 class StandardCard(BaseCard):
     """

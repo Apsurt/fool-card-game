@@ -5,10 +5,10 @@ Module handling logic of the game.
 from typing import List
 import pyCardDeck
 from pyCardDeck import CardType
-from card import StandardCard
-from dictionaries import ranks_short_to_long, suits
-from player import Player
-from errors import InvalidMove
+from .card import StandardCard
+from .dictionaries import ranks_short_to_long, suits
+from .player import Player
+from .errors import InvalidMove
 
 def default_cards() -> List[CardType]:
     """
