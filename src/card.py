@@ -15,6 +15,7 @@ class StandardCard(BaseCard):
         self.rank = rank
         self.value = short_to_value[rank]
         self.is_trump = False
+        self.is_public = False
 
     def __repr__(self) -> str:
         return self.rank+suits[self.suit]

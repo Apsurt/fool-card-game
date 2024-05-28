@@ -146,6 +146,8 @@ class Game:
         if len(sequence) > 1:
             if len(rank_set) > (len(sequence)+1)/2:
                 raise InvalidMove("Pair rule violated.")
+        for card in sequence:
+            card.is_public = True
         self.attack_pile.add_many(sequence)
 
     def defend(self, sequence: List[CardType]) -> List[CardType]:
@@ -162,6 +164,8 @@ class Game:
                 draw_from_attack.append(attack_card)
             else:
                 if card > attack_card:
+                    card.is_public = True
+                    attack_card.is_public = True
                     self.discard_pile.add_many([card, attack_card])
                 else:
                     raise InvalidMove("Defending card weaker or wrong suit.")
