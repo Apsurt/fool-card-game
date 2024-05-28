@@ -1,3 +1,7 @@
+from src.card import StandardCard
 
-def test_always_passes():
-    assert True
+def test_card():
+    card = StandardCard("Spades", "A")
+    assert card.suit == "Spades"
+    assert card.rank == "A"
+    assert card.value == 14
