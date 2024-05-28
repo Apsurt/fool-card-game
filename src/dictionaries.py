@@ -3,9 +3,9 @@ Helper Module:
 Module with dictionaries used throughout project.
 """
 
-suits = {'Hearts'  : '♥',
+suits = {'Clubs'   : '♣',
          'Diamonds': '♦',
-         'Clubs'   : '♣',
+         'Hearts'  : '♥',
          'Spades'  : '♠'}
 
 ranks_short_to_long = {'A':  'Ace',
@@ -49,3 +49,8 @@ short_to_value = {'A':  14,
                   'J':  11,
                   'Q':  12,
                   'K':  13}
+
+suit_to_value = {'Clubs'   : 0,
+                 'Diamonds': 1,
+                 'Hearts'  : 2,
+                 'Spades'  : 3}

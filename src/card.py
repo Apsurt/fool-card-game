@@ -3,19 +3,22 @@ Module containing card class
 """
 
 from pyCardDeck import BaseCard
-from dictionaries import suits, short_to_value
+from dictionaries import suits, short_to_value, suit_to_value
 
 class StandardCard(BaseCard):
     """
     Class for standard card.
     """
-    def __init__(self, suit: str, rank: str, name: str) -> None:
+    def __init__(self, suit: str, rank: str, name: str = "") -> None:
         super().__init__(f"{rank} of {suit}")
         self.suit = suit
         self.rank = rank
         self.value = short_to_value[rank]
         self.is_trump = False
         self.is_public = False
+
+    def __hash__(self) -> int:
+        return (suit_to_value[self.suit]+1)*100 + self.value
 
     def __repr__(self) -> str:
         return self.rank+suits[self.suit]
