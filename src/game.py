@@ -136,7 +136,21 @@ class Game:
         while self.get_player(player_idx).cards_left < limit:
             self.player_draw(player_idx)
 
+    def update_players_knowledge(self):
+        for player in self.players:
+            player.known_cards = {}
+            for other in self.players:
+                known = set()
+                for card in other.get_public_cards():
+                    known.add(card)
+                player.known_cards[other.name] = known
+            discarded = set()
+            for card in self.discard_pile:
+                discarded.add(card)
+            player.known_cards["discard"] = discarded
+
     def attack(self, sequence: List[CardType]) -> None:
+        print("Attacking sequence:")
         print(sequence)
         if self.attack_pile.cards_left:
             raise InvalidMove("Attack pile not empty, defend first.")
@@ -151,6 +165,7 @@ class Game:
         self.attack_pile.add_many(sequence)
 
     def defend(self, sequence: List[CardType]) -> List[CardType]:
+        print("Defending sequence:")
         print(sequence)
         if not self.attack_pile.cards_left:
             raise InvalidMove("Nothing to defend")
@@ -181,6 +196,10 @@ class Game:
             self.get_player(i).print_hand()
         running = True
         while running:
+            self.update_players_knowledge()
+            for player in self.players:
+                print(f"Known_cards for player {player.name}")
+                print(player.known_cards)
             player = self.current_player
             if player.cards_left == 0:
                 self.advance_current_player()

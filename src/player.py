@@ -13,6 +13,7 @@ class Player:
     def __init__(self, name) -> None:
         self.name = name
         self.hand = pyCardDeck.Deck([], False, f"Hand of {self.name}")
+        self.known_cards = {}
 
     def get_cards(self) -> List[CardType]:
         """
@@ -22,6 +23,14 @@ class Player:
         :rtype: List[CardType]
         """
         return list(iter(self.hand))
+
+    def get_public_cards(self):
+        public_cards = []
+        for card in self.hand:
+            if not card.is_public:
+                continue
+            public_cards.append(card)
+        return public_cards
 
     def draw(self, card: CardType) -> None:
         """
